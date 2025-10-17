@@ -106,7 +106,10 @@ const ProductCard = () => {
               </div>
             </div>
             <div className={`${styles.image} ${styles[getCardState(product)]}`}>
-              <img src="/images/Photo.png" alt="cat" />
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Photo.png`}
+                alt="cat"
+              />
             </div>
           </div>
           <div className={styles.bottomText}>
