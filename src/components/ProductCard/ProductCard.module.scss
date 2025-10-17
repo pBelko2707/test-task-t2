@@ -1,0 +1,298 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.productsContainer {
+  display: grid;
+  gap: 80px;
+  grid-template-columns: repeat(3, 1fr);
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "item1 item1"
+      "item2 item3";
+    gap: 40px;
+    & > *:nth-child(1) { grid-area: item1; justify-self: center;}
+    & > *:nth-child(2) { grid-area: item2; }
+    & > *:nth-child(3) { grid-area: item3; }
+  }
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  left: -79px;
+  top: -65px;
+  z-index: 9;
+  display: flex;
+
+  &.default {
+    & svg path {
+      fill: $primary-default;
+    }
+  }
+
+  &.hover {
+    & svg path {
+      fill: $primary-hover;
+    }
+  }
+
+  &.selected {
+    & svg path {
+      fill: $selected-default;
+    }
+  }
+
+  &.selectedHover {
+    & svg path {
+      fill: $selected-hover;
+    }
+  }
+
+  &.disabled {
+    & svg path {
+      fill: $disabled;
+    }
+  }
+
+  & svg path {
+    transition: $transition;
+  }
+}
+
+.productCard {
+  box-sizing: border-box;
+  padding: 21px 16px 16px 48px;
+  border: 4px solid;
+  border-radius: 12px;
+  background: $background-default;
+  position: relative;
+  overflow: hidden;
+  width: 320px;
+  height: 480px;
+  cursor: pointer;
+  clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 8%);
+  transition: $transition;
+
+  &.default {
+    border-color: $primary-default;
+  }
+
+  &.hover {
+    border-color: $primary-hover;
+    background: $background-hover;
+  }
+
+  &.selected {
+    border-color: $selected-default;
+    background: $background-hover;
+  }
+
+  &.selectedHover {
+    border-color: $selected-hover;
+    background: $background-hover;
+  }
+
+  &.disabled {
+    border-color: $disabled;
+    pointer-events: none;
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.subtitle {
+  color: $text-default;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+  text-align: left;
+  padding-left: 3px;
+  transition: $transition;
+
+  .selectedHover & {
+    color: $selected-hover;
+  }
+  .disabled & {
+    color: $disabled;
+    opacity: $opacity;
+  }
+}
+
+.title {
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 100%;
+  text-align: left;
+  margin: 5px 0 3px;
+  &.disabled {
+    color: $disabled;
+    opacity: $opacity;
+  }
+}
+
+.description {
+  color: #000000;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 100%;
+  text-align: left;
+  padding-left: 3px;
+  &.disabled {
+    color: $disabled;
+    opacity: $opacity;
+  }
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3px;
+  color: $text-default;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+  &.disabled {
+    color: $disabled;
+    opacity: $opacity;
+  }
+  & span {
+    font-weight: 700;
+  }
+}
+
+.image {
+  position: absolute;
+  top: 200px;
+  left: -32px;
+  &.disabled {
+    opacity: $opacity;
+  }
+}
+
+.weight {
+  padding: 20px 29.5px 8px 30.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  color: $background-hover;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  margin-top: auto;
+  margin-left: auto;
+  transition: $transition;
+
+  & > span {
+    font-size: 21px;
+  }
+
+  &.default {
+    background: $primary-default;
+  }
+
+  &.hover {
+    background: $primary-hover;
+  }
+
+  &.selected {
+    background: $selected-default;
+  }
+
+  &.selectedHover {
+    background: $selected-hover;
+  }
+
+  &.disabled {
+    background: $disabled;
+  }
+}
+
+.bottomText {
+  font-size: 13px;
+  line-height: 100%;
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: 400;
+  min-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disabledText {
+  color: $text-disabled;
+}
+
+.buyButton {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 100%;
+  text-align: center;
+  background: transparent;
+  border: none;
+  font-family: Trebuchet MS, sans-serif;
+  color: $primary-default;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  transition: $transition;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 1px;
+    width: 28px;
+    height: 1px;
+    background: repeating-linear-gradient(
+                    90deg,
+                    $primary-default,
+                    $primary-default 3px,
+                    transparent 3px,
+                    transparent 5px
+    );
+    transition: $transition;
+  }
+
+  &:hover {
+    color: $primary-hover;
+
+    &::after {
+      background: repeating-linear-gradient(
+                      90deg,
+                      $primary-hover,
+                      $primary-hover 3px,
+                      transparent 3px,
+                      transparent 5px
+      );
+    }
+  }
+};
